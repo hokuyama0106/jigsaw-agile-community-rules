@@ -62,10 +62,10 @@ mpiexec \
 -x PYTHONPATH=$(pwd) \
 {accelerate_env_var} \
 --bind-to none \
-python /mnt/nfs-mnj-hot-99/tmp/hokuyama/map-charting-student-math-misunderstandings/train_{args.training_type}.py \
+python /mnt/nfs-mnj-hot-99/tmp/hokuyama/jigsaw-agile-community-rules/train_{args.training_type}.py \
 --model-name {args.model_name} \
 --use-ompi \
---output-dir {Path(f"/mnt/nfs-mnj-hot-99/tmp/hokuyama/map-charting-student-math-misunderstandings/outputs/{args.workflow_name + "-" + args.model_name.replace(".","-").split("/")[-1]}-{start_time}")} \
+--output-dir {Path(f"/mnt/nfs-mnj-hot-99/tmp/hokuyama/jigsaw-agile-community-rules/outputs/{args.workflow_name + "-" + args.model_name.replace(".","-").split("/")[-1]}-{start_time}")} \
 --max-steps {args.max_steps}
 """,
                         ],
@@ -80,7 +80,7 @@ python /mnt/nfs-mnj-hot-99/tmp/hokuyama/map-charting-student-math-misunderstandi
         retry_limit=0,
     ),
 )
-minai.basic.setup(mpi_job, cpu=96, gpu=args.n_gpus, gpu_name="a100", memory=(768, "Gi"))
+minai.basic.setup(mpi_job, cpu=32, gpu=args.n_gpus, gpu_name="a100", memory=(256, "Gi"))
 
 minai.git_snapshot.setup(
     mpi_job, docker_repository=minai.git_snapshot.docker_repositories.minai_tmp()
@@ -93,7 +93,7 @@ main_template_name = minai.mpi_job.build(
 )
 
 workflow = minai.basic.create_workflow(
-    name="map-" + args.training_type + "-" + args.workflow_name,
+    name="jigzaw-" + args.training_type + "-" + args.workflow_name,
     spec=models.WorkflowSpec(
         templates=templates,
         entrypoint=main_template_name,

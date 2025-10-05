@@ -28,8 +28,8 @@ def main() -> None:
     training_args = GRPOConfig(
         use_cpu=False,
         output_dir=args.output_dir,
-        per_device_train_batch_size=2,
-        num_generations=8,
+        per_device_train_batch_size=4,
+        num_generations=4,
         learning_rate=5e-7,
         lr_scheduler_type="constant_with_warmup",
         warmup_ratio=0.01,

@@ -25,7 +25,7 @@ USER_PROMPT_TEMPLATE = """### RULE AND CONTEXT
 ### COMMENT TO EVALUATE
 - Comment Body: {comment_body}"""
 
-def format_dataset(x, model_name):
+def format_dataset(r, model_name):
     user_prompt = USER_PROMPT_TEMPLATE.format(
         rule_text=r['rule'],
         subreddit_name=r['subreddit'],
