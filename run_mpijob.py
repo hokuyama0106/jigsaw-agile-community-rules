@@ -80,7 +80,7 @@ python /mnt/nfs-mnj-hot-99/tmp/hokuyama/jigsaw-agile-community-rules/train_{args
         retry_limit=0,
     ),
 )
-minai.basic.setup(mpi_job, cpu=32, gpu=args.n_gpus, gpu_name="a100", memory=(256, "Gi"))
+minai.basic.setup(mpi_job, cpu=32, gpu=args.n_gpus, gpu_name="a100", memory=(512, "Gi"))
 
 minai.git_snapshot.setup(
     mpi_job, docker_repository=minai.git_snapshot.docker_repositories.minai_tmp()

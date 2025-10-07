@@ -7,7 +7,7 @@ import numpy as np
 import torch
 import torch.distributed as dist
 
-train_df = pd.read_csv("/mnt/nfs-mnj-hot-99/tmp/hokuyama/jigsaw-agile-community-rules/jigsaw-agile-community-rules/train.csv", index_col="row_id")
+train_df = pd.read_csv("/mnt/nfs-mnj-hot-99/tmp/hokuyama/jigsaw-agile-community-rules/jigsaw-agile-community-rules/train_v2.csv")
 
 def prob_check(c, row_id):
     reward = 0

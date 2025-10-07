@@ -10,29 +10,15 @@ A probability closer to 1.00 indicates a high likelihood of a rule violation, an
 
 YOUR OUTPUT MUST BE ONLY THE PROBABILITY VALUE, WITH NO OTHER TEXT, REASONING, OR EXPLANATION."""
 
-USER_PROMPT_TEMPLATE = """### RULE AND CONTEXT
-- Rule: {rule_text}
-- Subreddit: {subreddit_name} (This is the community where the comment was posted.)
-
-### POSITIVE EXAMPLES (Comments that VIOLATE the Rule)
-- Example 1: {positive_example_1}
-- Example 2: {positive_example_2}
-
-### NEGATIVE EXAMPLES (Comments that DO NOT Violate the Rule)
-- Example 1: {negative_example_1}
-- Example 2: {negative_example_2}
+USER_PROMPT_TEMPLATE = """### RULE
+{rule_text}
 
 ### COMMENT TO EVALUATE
-- Comment Body: {comment_body}"""
+{comment_body}"""
 
 def format_dataset(r, model_name):
     user_prompt = USER_PROMPT_TEMPLATE.format(
         rule_text=r['rule'],
-        subreddit_name=r['subreddit'],
-        positive_example_1=r['positive_example_1'],
-        positive_example_2=r['positive_example_2'],
-        negative_example_1=r['negative_example_1'],
-        negative_example_2=r['negative_example_2'],
         comment_body=r['body']
     )
     messages = [
@@ -59,7 +45,7 @@ def format_dataset(r, model_name):
     return data
 
 def make_dataset(model_name, train_type="grpo") -> Dataset:
-    dataset = load_dataset('csv', data_files='/mnt/nfs-mnj-hot-99/tmp/hokuyama/jigsaw-agile-community-rules/jigsaw-agile-community-rules/train.csv')["train"]
+    dataset = load_dataset('csv', data_files='/mnt/nfs-mnj-hot-99/tmp/hokuyama/jigsaw-agile-community-rules/jigsaw-agile-community-rules/train_v2.csv')["train"]
     data = dataset.map(format_dataset, fn_kwargs={"model_name": model_name})
 
     return data
